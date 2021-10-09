@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormGroup, Tile } from 'carbon-components-react';
 import AudioWave from '../AudioWave';
 import TranscriptBox from '../TranscriptBox';
+import ShowKeywordTable from '../ShowKeywordTable';
 
 export const OutputContainer = ({
   audioAnalyzer,
@@ -12,7 +13,7 @@ export const OutputContainer = ({
   audioWaveContainerRef,
   isTranscribing,
   keywordInfo,
-  transcriptArray,
+  transcriptArray
 }) => (
   <Tile className="output-container">
     <h3 className="container-title">Output</h3>
@@ -30,8 +31,12 @@ export const OutputContainer = ({
       <TranscriptBox
         keywordInfo={keywordInfo}
         transcriptArray={transcriptArray}
-      />
+        />
     </FormGroup>
+    <ShowKeywordTable 
+      keywordInfo={keywordInfo}
+      transcriptArray={transcriptArray}
+    />  
   </Tile>
 );
 

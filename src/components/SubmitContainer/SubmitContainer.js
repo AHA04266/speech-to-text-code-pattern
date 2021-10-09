@@ -5,7 +5,7 @@ import fetch from 'isomorphic-fetch';
 import models from '../../data/models.json';
 
 export const SubmitContainer = ({
-  isRecording,
+//  isRecording,
   isSamplePlaying,
   isUploadPlaying,
   keywordText,
@@ -15,8 +15,8 @@ export const SubmitContainer = ({
   onStopPlayingFileUpload,
   onStartPlayingSample,
   onStopPlayingSample,
-  onStartRecording,
-  onStopRecording,
+//  onStartRecording,
+//  onStopRecording,
   useSpeakerLabels,
 }) => {
   const [keywordList, setKeywordList] = useState([]);
@@ -78,13 +78,13 @@ export const SubmitContainer = ({
     };
   };
 
-  const getMicrophoneAudioConfig = async () => {
-    const baseConfig = await getBaseAudioConfig();
-    return {
-      ...baseConfig,
-      resultsBySpeaker: false,
-    };
-  };
+  // const getMicrophoneAudioConfig = async () => {
+  //   const baseConfig = await getBaseAudioConfig();
+  //   return {
+  //     ...baseConfig,
+  //     resultsBySpeaker: false,
+  //   };
+  // };
 
   const getUploadAudioConfig = async file => {
     const baseConfig = await getBaseAudioConfig();
@@ -120,29 +120,6 @@ export const SubmitContainer = ({
           Play audio sample
         </Button>
       )}
-      {isRecording ? (
-        <Button
-          className="submit-button"
-          kind="tertiary"
-          onClick={onStopRecording}
-        >
-          Stop recording
-        </Button>
-      ) : (
-        <Button
-          className="submit-button"
-          disabled={!modelName}
-          kind="tertiary"
-          onClick={async () => {
-            const config = await getMicrophoneAudioConfig();
-            if (!config.error) {
-              onStartRecording(config);
-            }
-          }}
-        >
-          Record your own
-        </Button>
-      )}
       {isUploadPlaying ? (
         <Button
           className="submit-button"
@@ -170,6 +147,31 @@ export const SubmitContainer = ({
       )}
     </div>
   );
+  /**
+   * {isRecording ? (
+        <Button
+          className="submit-button"
+          kind="tertiary"
+          onClick={onStopRecording}
+        >
+          Stop recording
+        </Button>
+      ) : (
+        <Button
+          className="submit-button"
+          disabled={!modelName}
+          kind="tertiary"
+          onClick={async () => {
+            const config = await getMicrophoneAudioConfig();
+            if (!config.error) {
+              onStartRecording(config);
+            }
+          }}
+        >
+          Record your own
+        </Button>
+      )}
+   */
 };
 
 SubmitContainer.propTypes = {

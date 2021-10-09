@@ -5,6 +5,7 @@ import KeywordTooltip from '../KeywordTooltip';
 import { createWordRegex } from './utils';
 
 const mapTranscriptTextToElements = (text, keywordInfo, totalIndex) => {
+
   let finalSentenceArray = [];
   let matches = [];
 
@@ -54,13 +55,15 @@ const mapTranscriptTextToElements = (text, keywordInfo, totalIndex) => {
       return {};
     }
 
-    return {
+    let contents = {
       text: sentenceFragment,
       type: 'keyword',
       startTime: infoForOccurence.start_time,
       endTime: infoForOccurence.end_time,
       confidence: infoForOccurence.confidence,
     };
+
+    return contents;
   });
 
   return finalSentenceArray;
