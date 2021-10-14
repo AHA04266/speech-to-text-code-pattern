@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: aha04266-stt-app
+    app.kubernetes.io/instance: aha04266-stt-app
+    app.kubernetes.io/name: aha04266-stt-app
+  name: aha04266-stt-app
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app.kubernetes.io/instance: aha04266-stt-app
+    app.kubernetes.io/name: aha04266-stt-app
+  sessionAffinity: None
+  type: ClusterIP

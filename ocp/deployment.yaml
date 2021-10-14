@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-uri: https://github.com/AHA04266/speech-to-text-code-pattern.git
+  labels:
+    app: aha04266-stt-app
+    app.kubernetes.io/instance: aha04266-stt-app
+    app.kubernetes.io/name: aha04266-stt-app
+    app.openshift.io/runtime: js
+  name: aha04266-stt-app
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: aha04266-stt-app
+      app.kubernetes.io/name: aha04266-stt-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: aha04266-stt-app
+        app.kubernetes.io/name: aha04266-stt-app
+    spec:
+      containers:
+        - env:
+          - name: INGRESS_HOST
+          - name: PROTOCOLS
+          - name: LOG_LEVEL
+            value: debug
+          name: aha04266-stt-app
+          image: quay.io/aha04266_ibm/stt-app 
+          imagePullPolicy: IfNotPresent
+          envFrom:
+          - configMapRef:
+              name: aha04266-app-config
+            prefix: SPEECH_TO_TEXT_
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 5000
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          ports:
+            - containerPort: 5000
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: http
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

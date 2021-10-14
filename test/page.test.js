@@ -6,20 +6,28 @@ describe('Input methods', () => {
     await page.goto('http://localhost:5000');
   });
 
+  it('Screen Check', async () => {
+    await expect(page).toClick('h2.header-title', {
+      // text: 'STT App for CheckRide'
+      text: 'Speech to Text App for CheckRide'
+    });
+  });
+
   it('Sample audio', async () => {
     await page.waitFor('div.bx--dropdown', { timeout: 0 });
 
     // Choose language model.
     await expect(page).toClick('div.bx--dropdown');
     await expect(page).toClick('div.bx--list-box__menu-item__option', {
-      text: 'US English (8khz Narrowband)',
+      // text: 'US English (8khz Narrowband)',
+      text: 'Japanese (16khz Broadband)',
     });
 
     // Add custom keywords.
     await expect(page).toFill('textarea.bx--text-area', 'course, I');
 
     // Choose to detect speakers.
-    await expect(page).toClick('span.bx--toggle__switch');
+    // await expect(page).toClick('span.bx--toggle__switch');
 
     // Play sample audio.
     await expect(page).toClick('button.submit-button', {
@@ -43,13 +51,15 @@ describe('Input methods', () => {
     // Choose language model.
     await expect(page).toClick('div.bx--dropdown');
     await expect(page).toClick('div.bx--list-box__menu-item__option', {
-      text: 'US English (16khz Broadband)',
+      // text: 'US English (16khz Broadband)',
+      text: 'Japanese (16khz Broadband)',
     });
 
     // Upload file.
     await expect(page).toUploadFile(
       'input.bx--visually-hidden',
-      'public/audio/en-US_Broadband-sample.wav',
+      // 'public/audio/en-US_Broadband-sample.wav',
+      'public/audio/ja-JP_Broadband-sample.wav',
     );
 
     // Wait for the audio to play for a bit.
