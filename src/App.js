@@ -17,7 +17,7 @@ const HEADER_LINKS = [
     href='https://console-openshift-console.ibmcloud-roks-zmiopc20-6ccd7f378ae819553d37d5f2ee142bd6-0000.jp-tok.containers.appdomain.cloud/dashboards'
   >
     <Button className='link-button' kind='tertiary' renderIcon={Launch16}>
-      Go to OpenShift!!
+      Go to OpenShift
     </Button>
     <IbmCloud24 className='link-icon' />
   </Link>,
