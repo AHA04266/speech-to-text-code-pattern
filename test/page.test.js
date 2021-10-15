@@ -7,10 +7,10 @@ describe('Input methods', () => {
   });
 
   it('Screen Check', async () => {
-    await expect(page).toClick('h2.header-title', {
-      // text: 'STT App for CheckRide'
-      text: 'Speech to Text App for CheckRide'
-    });
+    // await expect(page).toClick('h2.header-title', {
+    //   // text: 'STT App for CheckRide'
+    //   text: 'Speech to Text App for CheckRide'
+    // });
   });
 
   it('Sample audio', async () => {
